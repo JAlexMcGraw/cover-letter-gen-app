@@ -4,9 +4,10 @@ interface TextAreaProps {
   value: string;
   onChange: (value: string) => void;
   placeholder?: string;
+  disabled?: boolean;
 }
 
-const CoverLetterOutput: React.FC<TextAreaProps> = ({ value, onChange, placeholder }) => {
+const CoverLetterOutput: React.FC<TextAreaProps> = ({ value, onChange, placeholder, disabled = true }) => {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
   const handleChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -28,6 +29,7 @@ const CoverLetterOutput: React.FC<TextAreaProps> = ({ value, onChange, placehold
       value={value}
       onChange={handleChange}
       placeholder={placeholder}
+      disabled={disabled}
       rows={1} // Initial row count
       style={{
         width: '100%',

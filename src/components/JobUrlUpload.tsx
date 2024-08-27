@@ -1,7 +1,10 @@
-import React, { useState } from "react";
+import React, { Dispatch, SetStateAction } from "react";
 
-const JobUrlUpload: React.FC = () => {
-    const [urlText, setUrlText] = useState<string>('');
+interface jobUrlUploadProps {
+    urlText: string;
+    setUrlText: Dispatch<SetStateAction<string>>;
+}
+const JobUrlUpload: React.FC<jobUrlUploadProps> = ({ urlText, setUrlText }) => {
 
     const handleUrlUpload = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
         setUrlText(event.target.value);

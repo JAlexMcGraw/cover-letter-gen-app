@@ -1,7 +1,12 @@
-import React, { useState } from 'react';
+import React, { Dispatch, SetStateAction, useState } from 'react';
 
-const SingleFileUploader = () => {
-  const [file, setFile] = useState<File | null>(null);
+interface SingleFileUploaderProps {
+    resumeFile: File | null;
+    setResumeFile: Dispatch<SetStateAction<File | null>>;
+}
+
+const SingleFileUploader: React.FC<SingleFileUploaderProps> = ({ resumeFile, setResumeFile }) => {
+//   const [file, setFile] = useState<File | null>(null);
   const [status, setStatus] = useState<
   'initial' | 'uploading' | 'success' | 'failure'
   >('initial');
@@ -13,21 +18,21 @@ const SingleFileUploader = () => {
         e.target.value = ''; // Clear the file input
         return;
     } else if (e.target.files) {
-      setFile(e.target.files[0]);
+        setResumeFile(e.target.files[0]);
     }
   };
 
   const handleUpload = async () => {
-    if (!file) {
+    if (!resumeFile) {
         alert('A PDF file must be provided');
         return;
     }
-    
-    if (file) {
+
+    if (resumeFile) {
       setStatus('uploading');
   
       const formData = new FormData();
-      formData.append('file', file);
+      formData.append('file', resumeFile);
   
       try {
         // You can write the URL of your server or any other endpoint used for file upload
@@ -55,18 +60,18 @@ const SingleFileUploader = () => {
         </label>
         <input id="file" type="file" onChange={handleFileChange} />
       </div>
-      {file && (
+      {resumeFile && (
         <section>
           File details:
           <ul>
-            <li>Name: {file.name}</li>
-            <li>Type: {file.type}</li>
-            <li>Size: {file.size} bytes</li>
+            <li>Name: {resumeFile.name}</li>
+            <li>Type: {resumeFile.type}</li>
+            <li>Size: {resumeFile.size} bytes</li>
           </ul>
         </section>
       )}
 
-      {file && 
+      {resumeFile && 
       (<button onClick={handleUpload}>Upload a file</button>
       )}
 
