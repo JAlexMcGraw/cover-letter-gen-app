@@ -1,17 +1,16 @@
 import React from 'react';
 
 interface GenerateButtonProps {
-    resumeFile: File | null;
-    urlText: string;
+  onClick: (e: React.FormEvent) => void;
+  disabled: boolean;
 }
-const GenerateButton: React.FC<GenerateButtonProps> = ({ resumeFile, urlText }) => {
-    const isEnabled = urlText !== '' && resumeFile !== null;
 
-    return (
-        <button disabled={!isEnabled}>
-            Generate!
-        </button>
-    );
+const GenerateButton: React.FC<GenerateButtonProps> = ({ onClick, disabled }) => {
+  return (
+    <button onClick={onClick} disabled={disabled}>
+      Generate Cover Letter
+    </button>
+  );
 };
 
 export default GenerateButton;
