@@ -1,11 +1,13 @@
 import React, { Dispatch, SetStateAction, useState } from 'react';
+import axios from 'axios';
 
 interface SingleFileUploaderProps {
     resumeFile: File | null;
     setResumeFile: Dispatch<SetStateAction<File | null>>;
+    onUploadSuccess: (text: string) => void;
 }
 
-const SingleFileUploader: React.FC<SingleFileUploaderProps> = ({ resumeFile, setResumeFile }) => {
+const SingleFileUploader: React.FC<SingleFileUploaderProps> = ({ resumeFile, setResumeFile, onUploadSuccess }) => {
 //   const [file, setFile] = useState<File | null>(null);
   const [status, setStatus] = useState<
   'initial' | 'uploading' | 'success' | 'failure'
@@ -24,31 +26,39 @@ const SingleFileUploader: React.FC<SingleFileUploaderProps> = ({ resumeFile, set
 
   const handleUpload = async () => {
     if (!resumeFile) {
-        alert('A PDF file must be provided');
-        return;
+      alert('A PDF file must be provided');
+      return;
     }
-
-    if (resumeFile) {
-      setStatus('uploading');
   
-      const formData = new FormData();
-      formData.append('file', resumeFile);
+    setStatus('uploading');
   
-      try {
-        // You can write the URL of your server or any other endpoint used for file upload
-        const result = await fetch('https://httpbin.org/post', {
-          method: 'POST',
-          body: formData,
-        });
+    const formData = new FormData();
+    formData.append('file', resumeFile);
   
-        const data = await result.json();
-        
-        console.log(data);
+    try {
+      const response = await axios.post('http://localhost:8000/upload-pdf/', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+        validateStatus: (status) => status < 500, // Treat all non-500 responses as successful
+      });
+  
+      console.log('Response status:', response.status);
+      console.log('Response data:', response.data);
+  
+      if (response.status === 200 && response.data && response.data.text) {
         setStatus('success');
-      } catch (error) {
-        console.log(error);
-        setStatus('failure');
+        onUploadSuccess(response.data.text);
+      } else {
+        throw new Error(`Unexpected response: ${JSON.stringify(response.data)}`);
       }
+    } catch (error) {
+      console.error('Upload error:', error);
+      if (axios.isAxiosError(error) && error.response) {
+        console.error('Response status:', error.response.status);
+        console.error('Response data:', error.response.data);
+      }
+      setStatus('failure');
     }
   };
 
@@ -58,7 +68,7 @@ const SingleFileUploader: React.FC<SingleFileUploaderProps> = ({ resumeFile, set
         <label htmlFor="file" className="sr-only">
           Choose a file
         </label>
-        <input id="file" type="file" onChange={handleFileChange} />
+        <input id="file" type="file" onChange={handleFileChange} accept='.pdf' />
       </div>
       {resumeFile && (
         <section>
