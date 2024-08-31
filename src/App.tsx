@@ -3,21 +3,27 @@ import Header from './components/Header';
 import StringUpload from './components/StringUpload';
 import SingleFileUploader from './components/SingleFileUpload';
 import CoverLetterOutput from './components/CoverLetterOutput';
-import GenerateButton from './components/GenerateButton';
+import ResumeText from './components/ResumeText';
 import axios from 'axios';
+import JobUrlUpload from './components/JobUrlUpload';
 
 function App() {
   const [coverLetterText, setCoverLetterText] = useState<string>('');
   const [resumeFile, setResumeFile] = useState<File | null>(null);
-  const [urlText, setUrlText] = useState<string>('');
+  const [urlText, setUrlText] = useState<string>(''); 
   const [apiKey, setApiKey] = useState<string>('');
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
-  const [resumeText, setResumeText] = useState<string | null>(null);
+  const [resumeText, setResumeText] = useState<string | undefined>(undefined);
+  const [jobText, setJobText] = useState<string | undefined>(undefined);
 
   const handleUploadSuccess = (text: string) => {
     setResumeText(text);
   };
+
+  const handleJobTextSuccess = (text: string) => {
+    setJobText(text)
+  }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -71,20 +77,31 @@ function App() {
     <Fragment>
       <Header title='Cover Letter Generator' textColor='white' />
       <SingleFileUploader resumeFile={resumeFile} setResumeFile={setResumeFile} onUploadSuccess={handleUploadSuccess}/>
-      <StringUpload text={urlText} setText={setUrlText} placeholder="Upload Job URL here" />
+      <ResumeText 
+        text={resumeText}
+        placeholder='Resume text here'
+        disabled={true}
+      />
+      <JobUrlUpload text={urlText} setText={setUrlText} placeholder="Upload Job URL here" onUploadSuccess={handleJobTextSuccess}/>
       <StringUpload text={apiKey} setText={setApiKey} placeholder="Upload OpenAI API key here" />
       <div>
-        <GenerateButton 
+        {/* <GenerateButton 
           onClick={handleSubmit}
-          disabled={!resumeFile || !urlText || !apiKey || isLoading}
-        />
+          disabled={!resumeFile || !jobText || !apiKey || isLoading}
+        /> */}
       </div>
       {isLoading && <p>Loading...</p>}
       {error && <p style={{ color: 'red' }}>{error}</p>}
       <CoverLetterOutput 
         value={coverLetterText} 
         onChange={setCoverLetterText} 
-        placeholder='Cover letter output here!' 
+        placeholder='Cover letter output here!'
+        jobText={jobText}
+        setCoverLetterText={setCoverLetterText}
+        resumeText={resumeText}
+        apiKey={apiKey}
+
+
       />
     </Fragment>
   );

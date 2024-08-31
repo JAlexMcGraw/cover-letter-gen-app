@@ -1,13 +1,18 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, SetStateAction, Dispatch } from 'react';
+import axios from 'axios';
 
 interface TextAreaProps {
-  value: string;
+  value: string | undefined;
   onChange: (value: string) => void;
+  setCoverLetterText: Dispatch<SetStateAction<string>>;
+  jobText: string | undefined;
+  resumeText: string | undefined;
+  apiKey: string;
   placeholder?: string;
   disabled?: boolean;
 }
 
-const CoverLetterOutput: React.FC<TextAreaProps> = ({ value, onChange, placeholder, disabled = true }) => {
+const CoverLetterOutput: React.FC<TextAreaProps> = ({ value, onChange, setCoverLetterText, resumeText, apiKey, jobText, placeholder, disabled = true }) => {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
   const handleChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -23,7 +28,44 @@ const CoverLetterOutput: React.FC<TextAreaProps> = ({ value, onChange, placehold
     }
   }, [value]);
 
+  const handleSubmit = async () => {
+    try {
+      console.log('Sending request with data:', {
+        job_post_text: jobText,
+        resume_text: resumeText,
+        openai_api_key: apiKey.substring(0, 5) + '...' // Log only the first 5 characters of the API key
+      });
+
+      const response = await axios.post('/api/generate_cover_letter/', {
+        job_post_text: jobText,
+        resume_text: resumeText,
+        openai_api_key: apiKey
+      }, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+
+      console.log("Response data", response.data);
+      if (response.status === 200 && response.data && response.data.text) {
+        setCoverLetterText(response.data.text);
+      } else {
+        throw new Error(`Unexpected response: ${JSON.stringify(response.data)}`);
+      }
+    } catch (error) {
+      console.error('Upload error:', error);
+      if (axios.isAxiosError(error)) {
+        console.error('Response status:', error.response?.status);
+        console.error('Response data:', error.response?.data);
+        console.error('Error message:', error.message);
+        console.error('Error config:', error.config);
+      }
+    }
+  }
+
+
   return (
+    <div>
     <textarea
       ref={textareaRef}
       value={value}
@@ -37,6 +79,8 @@ const CoverLetterOutput: React.FC<TextAreaProps> = ({ value, onChange, placehold
         overflow: 'hidden', // Hide overflow to avoid scrollbar
       }}
     />
+    <button onClick={handleSubmit}>Generate Cover Letter</button>
+    </div>
   );
 };
 

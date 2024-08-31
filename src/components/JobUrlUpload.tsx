@@ -1,0 +1,66 @@
+import React, { Dispatch, SetStateAction, useState } from "react";
+import axios from 'axios';
+
+interface JobUrlUploadProps {
+    text: string | undefined;
+    setText: Dispatch<SetStateAction<string>>;
+    placeholder: string;
+    onUploadSuccess: (text: string) => void;
+}
+const JobUrlUpload: React.FC<JobUrlUploadProps> = ({ text, setText, placeholder, onUploadSuccess }) => {
+    
+    const [status, setStatus] = useState<
+    'initial' | 'uploading' | 'success' | 'failure'
+    >('initial');
+
+    const handleUrlUpload = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+        setText(event.target.value);
+    };
+
+    const handleSubmit = async () => {
+
+        setStatus('uploading')
+
+        try {
+            const response = await axios.post('/api/load_job_url/', {
+                'job_posting_url': text
+            }, {
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                validateStatus: (status) => status < 500,
+        });
+
+            console.log("Response data", response.data)
+        if (response.status === 200 && response.data && response.data.text) {
+            setStatus('success');
+            onUploadSuccess(response.data.text);
+            console.log('Upload: ', status)
+            console.log('Text: ', response.data.text)
+            } else {
+            throw new Error(`Unexpected response: ${JSON.stringify(response.data)}`);
+            }
+        } catch (error) {
+            console.error('Upload error:', error);
+            if (axios.isAxiosError(error) && error.response) {
+              console.error('Response status:', error.response.status);
+              console.error('Response data:', error.response.data);
+            }
+            setStatus('failure');
+          }
+    };
+
+    return (
+        <div>
+            <textarea
+                value={text}
+                onChange={handleUrlUpload}
+                placeholder={placeholder}
+                rows={1}
+            />
+            <button onClick={handleSubmit}>Upload</button>
+        </div>
+    );
+};
+
+export default JobUrlUpload;

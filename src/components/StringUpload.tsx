@@ -1,7 +1,7 @@
 import React, { Dispatch, SetStateAction } from "react";
 
 interface stringUploadProps {
-    text: string;
+    text: string | undefined;
     setText: Dispatch<SetStateAction<string>>;
     placeholder: string;
 }
