@@ -1,50 +1,11 @@
-# React + TypeScript + Vite
+# Cover Letter Generator
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+### Built using Typescript + Python + React
 
-Currently, two official plugins are available:
+This project was built using Typescript/React front end, a Python/FastAPI backend, and Vite to get the project structure and boilerplate set up. This currently only runs on localhost and does not have a public domain. 
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+I've recently wanted to get into app/product development, but my background is in strictly Python, generally around the DS/GenAI space. This is my first project using Typescript and React. It seemed like a great way to start, because I had already built a lot of the needed Python code a while back, but had no idea how to actually build something an individual could use. It is definitely still a work in progress at the moment, but this is to show that I'm starting to learn how to build it all.
 
-## Expanding the ESLint configuration
+This simple project takes an individual's PDF resume file, a link to a job posting (ideally from the company's website and not a 3rd party), and a user's API key (need to build this with Llama so don't need to require a key). The user can then click generate, and it will generate a cover letter that is tailored for that job posting, based off the individual's resume. 
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
-
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
-
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+I'm still learning the CSS side of things and adding some functionality, but this is a working start. I appreciate any feedback.

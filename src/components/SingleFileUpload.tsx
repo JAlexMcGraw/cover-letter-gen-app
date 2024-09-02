@@ -1,5 +1,6 @@
 import React, { Dispatch, SetStateAction, useState } from 'react';
 import axios from 'axios';
+import styles from './styles/styles.module.css';
 
 interface SingleFileUploaderProps {
     resumeFile: File | null;
@@ -64,7 +65,7 @@ const SingleFileUploader: React.FC<SingleFileUploaderProps> = ({ resumeFile, set
 
   return (
     <>
-      <div>
+      <div className={styles.body}>
         <label htmlFor="file" className="sr-only">
           Choose a file
         </label>

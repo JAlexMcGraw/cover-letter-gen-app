@@ -1,4 +1,5 @@
 import React, { useRef, useEffect } from 'react';
+import styles from './styles/styles.module.css';
 
 interface ResumeTextProps {
     text: string | undefined;
@@ -19,7 +20,7 @@ const ResumeText: React.FC<ResumeTextProps> = ({ text, placeholder, disabled }) 
       }, [text]);
 
     return (
-        <textarea
+        <textarea className={styles.body}
         ref={textareaRef}
         value={text}
         placeholder={placeholder}
