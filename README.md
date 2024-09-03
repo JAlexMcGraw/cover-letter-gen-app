@@ -9,3 +9,11 @@ I've recently wanted to get into app/product development, but my background is i
 This simple project takes an individual's PDF resume file, a link to a job posting (ideally from the company's website and not a 3rd party), and a user's API key (need to build this with Llama so don't need to require a key). The user can then click generate, and it will generate a cover letter that is tailored for that job posting, based off the individual's resume. 
 
 I'm still learning the CSS side of things and adding some functionality, but this is a working start. I appreciate any feedback.
+
+### To run this project
+
+You will need ```npm``` and ```conda``` installed.
+
+Starting with the backend, you will need python installed. Once it is, run ```conda env create -n <YOUR-CONDA-ENV-NAME> -f environment.yml```. This will create a new conda virtual environment in which the backend will run. Once created, then run ```conda activate <YOUR-CONDA-ENV-NAME>```. Once you're in the virtual environment, now run ```uvicorn src.backend.backend:app```. This starts the Uvicorn/FastAPI backend. If you want to make any changes to the backend on the fly, add ```--reload``` at the end of the ```uvicorn``` command.
+
+The frontend requires you have typescript and react installed. Once these are installed, run ```npm run dev```. This will run the frontend in your default browser, in a development environment. If you decide to make any changes, it will update the frontend every time those changes are saved.
