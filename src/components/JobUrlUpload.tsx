@@ -1,4 +1,5 @@
 import React, { Dispatch, SetStateAction, useState } from "react";
+import Result from "./Result";
 import axios from 'axios';
 
 interface JobUrlUploadProps {
@@ -59,6 +60,7 @@ const JobUrlUpload: React.FC<JobUrlUploadProps> = ({ text, setText, placeholder,
                 rows={1}
             />
             <button onClick={handleSubmit}>Upload</button>
+            <Result status={status} uploadType="URL" />
         </div>
     );
 };

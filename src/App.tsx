@@ -83,7 +83,7 @@ function App() {
         disabled={true}
       />
       <JobUrlUpload text={urlText} setText={setUrlText} placeholder="Upload Job URL here" onUploadSuccess={handleJobTextSuccess}/>
-      <StringUpload text={apiKey} setText={setApiKey} placeholder="Upload OpenAI API key here" />
+      <StringUpload keyText={apiKey} setKeyText={setApiKey} placeholder="Upload OpenAI API key here" />
       {isLoading && <p>Loading...</p>}
       {error && <p style={{ color: 'red' }}>{error}</p>}
       <CoverLetterOutput 

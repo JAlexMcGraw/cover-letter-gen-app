@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, SetStateAction, Dispatch } from 'react';
+import React, { useRef, useEffect, SetStateAction, Dispatch, useState } from 'react';
 import axios from 'axios';
 
 interface TextAreaProps {
@@ -14,6 +14,10 @@ interface TextAreaProps {
 
 const CoverLetterOutput: React.FC<TextAreaProps> = ({ value, onChange, setCoverLetterText, resumeText, apiKey, jobText, placeholder, disabled = true }) => {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
+
+  const [generationStatus, setGenerationStatus] = useState<
+    'initial' | 'generating' | 'success' | 'failure'
+    >('initial');
 
   const handleChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     onChange(event.target.value);
@@ -35,7 +39,8 @@ const CoverLetterOutput: React.FC<TextAreaProps> = ({ value, onChange, setCoverL
         resume_text: resumeText,
         openai_api_key: apiKey.substring(0, 5) + '...' // Log only the first 5 characters of the API key
       });
-
+      
+      setGenerationStatus('generating');
       const response = await axios.post('/api/generate_cover_letter/', {
         job_post_text: jobText,
         resume_text: resumeText,
@@ -49,11 +54,14 @@ const CoverLetterOutput: React.FC<TextAreaProps> = ({ value, onChange, setCoverL
       console.log("Response data", response.data);
       if (response.status === 200 && response.data && response.data.text) {
         setCoverLetterText(response.data.text);
+        setGenerationStatus('success');
       } else {
         throw new Error(`Unexpected response: ${JSON.stringify(response.data)}`);
+        setGenerationStatus('failure');
       }
     } catch (error) {
       console.error('Upload error:', error);
+      setGenerationStatus('failure');
       if (axios.isAxiosError(error)) {
         console.error('Response status:', error.response?.status);
         console.error('Response data:', error.response?.data);
@@ -80,8 +88,25 @@ const CoverLetterOutput: React.FC<TextAreaProps> = ({ value, onChange, setCoverL
       }}
     />
     <button onClick={handleSubmit}>Generate Cover Letter</button>
+    <GenerationResult status={generationStatus} />
     </div>
   );
+};
+
+interface GenerationResultProps {
+  status: "initial" | "generating" | "success" | "failure";
+}
+
+const GenerationResult = ( {status}: GenerationResultProps ): JSX.Element | null => {
+  if (status === "success") {
+    return <p>✅  Cover letter generated successfully!</p>;
+  } else if (status === "failure") {
+    return <p>❌ Cover letter generation failed!</p>;
+  } else if (status === "generating") {
+    return <p>⏳ Generating cover letter...</p>;
+  } else {
+    return null;
+  }
 };
 
 export default CoverLetterOutput;

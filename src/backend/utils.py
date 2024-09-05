@@ -89,7 +89,7 @@ class CoverLetterGenerator(BaseModel):
         
         return text_content
     
-    def generate_cover_letter(self, temperature: float = 0.7) -> str:
+    def generate_cover_letter(self, temperature: float = 0.3) -> str:
         from openai import OpenAI
         # os.environ['OPENAI_API_KEY'] = self.openai_api_key
         # openai.api_key = self.openai_api_key

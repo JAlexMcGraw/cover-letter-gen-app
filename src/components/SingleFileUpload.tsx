@@ -1,5 +1,6 @@
 import React, { Dispatch, SetStateAction, useState } from 'react';
 import axios from 'axios';
+import Result from './Result';
 import styles from './styles/styles.module.css';
 
 interface SingleFileUploaderProps {
@@ -86,22 +87,10 @@ const SingleFileUploader: React.FC<SingleFileUploaderProps> = ({ resumeFile, set
       (<button onClick={handleUpload}>Upload a file</button>
       )}
 
-      <Result status={status} />
+      <Result status={status} uploadType='File' />
     </>
   );
 };
-
-const Result = ({ status }: { status: string }) => {
-    if (status === "success") {
-      return <p>✅ File uploaded successfully!</p>;
-    } else if (status === "failure") {
-      return <p>❌ File upload failed!</p>;
-    } else if (status === "uploading") {
-      return <p>⏳ Uploading selected file...</p>;
-    } else {
-      return null;
-    }
-  };
   
 
 export default SingleFileUploader;

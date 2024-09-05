@@ -96,10 +96,10 @@ class CoverLetterData(BaseModel):
 @app.post("/generate_cover_letter/")
 async def cover_letter_generate(data: CoverLetterData):
     try:
-        logger.info("Received request for cover letter generation")
-        logger.debug(f"Job post text: {data.job_post_text[:100]}...")
-        logger.debug(f"Resume text: {data.resume_text[:100]}...")
-        logger.debug(f"API Key (first 5 chars): {data.openai_api_key[:5]}...")
+    #     logger.info("Received request for cover letter generation")
+    #     logger.debug(f"Job post text: {data.job_post_text[:100]}...")
+    #     logger.debug(f"Resume text: {data.resume_text[:100]}...")
+    #     logger.debug(f"API Key (first 5 chars): {data.openai_api_key[:5]}...")
 
         # Here you would typically use your CoverLetterGenerator
         # For now, we'll just return a placeholder
