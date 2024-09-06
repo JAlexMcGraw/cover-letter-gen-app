@@ -12,7 +12,7 @@ interface TextAreaProps {
   disabled?: boolean;
 }
 
-const CoverLetterOutput: React.FC<TextAreaProps> = ({ value, onChange, setCoverLetterText, resumeText, apiKey, jobText, placeholder, disabled = true }) => {
+const CoverLetterOutput: React.FC<TextAreaProps> = ({ value, onChange, setCoverLetterText, resumeText, apiKey, jobText, placeholder, disabled = false }) => {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
   const [generationStatus, setGenerationStatus] = useState<

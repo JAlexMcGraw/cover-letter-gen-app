@@ -6,6 +6,7 @@ import CoverLetterOutput from './components/CoverLetterOutput';
 import ResumeText from './components/ResumeText';
 import axios from 'axios';
 import JobUrlUpload from './components/JobUrlUpload';
+import PdfDownload from './components/PdfDownload';
 
 function App() {
   const [coverLetterText, setCoverLetterText] = useState<string>('');
@@ -94,9 +95,8 @@ function App() {
         setCoverLetterText={setCoverLetterText}
         resumeText={resumeText}
         apiKey={apiKey}
-
-
       />
+      <PdfDownload coverLetterText={coverLetterText} />
     </Fragment>
   );
 }
