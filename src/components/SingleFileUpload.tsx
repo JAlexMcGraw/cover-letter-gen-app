@@ -1,15 +1,17 @@
 import React, { Dispatch, SetStateAction, useState } from 'react';
 import axios from 'axios';
 import Result from './Result';
-import styles from './styles/styles.module.css';
+import ResumeText from './ResumeText';
+import './styles/styles.css';
 
 interface SingleFileUploaderProps {
     resumeFile: File | null;
+    resumeText: string | undefined;
     setResumeFile: Dispatch<SetStateAction<File | null>>;
     onUploadSuccess: (text: string) => void;
 }
 
-const SingleFileUploader: React.FC<SingleFileUploaderProps> = ({ resumeFile, setResumeFile, onUploadSuccess }) => {
+const SingleFileUploader: React.FC<SingleFileUploaderProps> = ({ resumeFile, resumeText, setResumeFile, onUploadSuccess }) => {
 //   const [file, setFile] = useState<File | null>(null);
   const [status, setStatus] = useState<
   'initial' | 'uploading' | 'success' | 'failure'
@@ -66,12 +68,11 @@ const SingleFileUploader: React.FC<SingleFileUploaderProps> = ({ resumeFile, set
 
   return (
     <>
-      <div className={styles.body}>
-        <label htmlFor="file" className="sr-only">
+      <div className='left'>
+        {/* <label htmlFor="file" className="sr-only"> */}
           Choose a file
-        </label>
+        {/* </label> */}
         <input id="file" type="file" onChange={handleFileChange} accept='.pdf' />
-      </div>
       {resumeFile && (
         <section>
           File details:
@@ -88,6 +89,12 @@ const SingleFileUploader: React.FC<SingleFileUploaderProps> = ({ resumeFile, set
       )}
 
       <Result status={status} uploadType='File' />
+      <ResumeText 
+        text={resumeText}
+        placeholder='Resume text here'
+        disabled={true}
+      />
+      </div>
     </>
   );
 };

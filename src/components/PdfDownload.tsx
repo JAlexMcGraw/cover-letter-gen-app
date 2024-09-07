@@ -1,4 +1,4 @@
-import React, { useState, SetStateAction, Dispatch } from 'react';
+import React from 'react';
 import jsPDF from 'jspdf';
 
 interface PdfDownloadProps {
@@ -19,7 +19,7 @@ const PdfDownload: React.FC<PdfDownloadProps> = ( {coverLetterText }) => {
 
   return (
     <div>
-      <button onClick={downloadPdf}>Download as PDF</button>
+      <button id="cover-letter-download" onClick={downloadPdf}>Download as PDF</button>
     </div>
   );
 };

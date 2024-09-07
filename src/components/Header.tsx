@@ -1,5 +1,5 @@
 import { ReactElement } from "react"
-import styles from './styles/styles.module.css';
+import './styles/styles.css';
 
 type HeadingProps = { title: string
                     textColor?: string 
@@ -7,7 +7,7 @@ type HeadingProps = { title: string
 
 const Header = ({ title, textColor }: HeadingProps ): ReactElement => { // style={{ color: 'white', alignItems: 'center' }}
     return (
-        <h1 className={styles.header}> 
+        <h1 className="header"> 
             {title}
         </h1>
     );

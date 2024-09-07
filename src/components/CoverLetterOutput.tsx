@@ -1,10 +1,12 @@
 import React, { useRef, useEffect, SetStateAction, Dispatch, useState } from 'react';
+import PdfDownload from './PdfDownload';
 import axios from 'axios';
 
 interface TextAreaProps {
   value: string | undefined;
   onChange: (value: string) => void;
   setCoverLetterText: Dispatch<SetStateAction<string>>;
+  coverLetterText: string;
   jobText: string | undefined;
   resumeText: string | undefined;
   apiKey: string;
@@ -12,7 +14,14 @@ interface TextAreaProps {
   disabled?: boolean;
 }
 
-const CoverLetterOutput: React.FC<TextAreaProps> = ({ value, onChange, setCoverLetterText, resumeText, apiKey, jobText, placeholder, disabled = false }) => {
+const CoverLetterOutput: React.FC<TextAreaProps> = ({ value, onChange, setCoverLetterText, coverLetterText, resumeText, apiKey, jobText, placeholder, disabled = false }) => {
+
+  if (value === '') {
+    disabled = true;
+  } else {
+    disabled = false;
+  }
+
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
   const [generationStatus, setGenerationStatus] = useState<
@@ -57,7 +66,7 @@ const CoverLetterOutput: React.FC<TextAreaProps> = ({ value, onChange, setCoverL
         setGenerationStatus('success');
       } else {
         throw new Error(`Unexpected response: ${JSON.stringify(response.data)}`);
-        setGenerationStatus('failure');
+        // setGenerationStatus('failure');
       }
     } catch (error) {
       console.error('Upload error:', error);
@@ -73,7 +82,11 @@ const CoverLetterOutput: React.FC<TextAreaProps> = ({ value, onChange, setCoverL
 
 
   return (
-    <div>
+    <div className='bottom'>
+      <div className='button-container'>
+        <button id="cover-letter-generate" onClick={handleSubmit}>Generate Cover Letter</button>
+        <PdfDownload coverLetterText={coverLetterText}/>
+      </div>
     <textarea
       ref={textareaRef}
       value={value}
@@ -87,7 +100,7 @@ const CoverLetterOutput: React.FC<TextAreaProps> = ({ value, onChange, setCoverL
         overflow: 'hidden', // Hide overflow to avoid scrollbar
       }}
     />
-    <button onClick={handleSubmit}>Generate Cover Letter</button>
+
     <GenerationResult status={generationStatus} />
     </div>
   );

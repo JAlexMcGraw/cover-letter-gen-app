@@ -75,29 +75,33 @@ function App() {
   };
 
   return (
-    <Fragment>
+    <>
+    {/* <header> */}
       <Header title='Cover Letter Generator' textColor='white' />
-      <SingleFileUploader resumeFile={resumeFile} setResumeFile={setResumeFile} onUploadSuccess={handleUploadSuccess}/>
-      <ResumeText 
-        text={resumeText}
-        placeholder='Resume text here'
-        disabled={true}
-      />
-      <JobUrlUpload text={urlText} setText={setUrlText} placeholder="Upload Job URL here" onUploadSuccess={handleJobTextSuccess}/>
-      <StringUpload keyText={apiKey} setKeyText={setApiKey} placeholder="Upload OpenAI API key here" />
-      {isLoading && <p>Loading...</p>}
-      {error && <p style={{ color: 'red' }}>{error}</p>}
-      <CoverLetterOutput 
-        value={coverLetterText} 
-        onChange={setCoverLetterText} 
-        placeholder='Cover letter output here!'
-        jobText={jobText}
-        setCoverLetterText={setCoverLetterText}
-        resumeText={resumeText}
-        apiKey={apiKey}
-      />
-      <PdfDownload coverLetterText={coverLetterText} />
-    </Fragment>
+      {/* </header> */}
+      <div className='body'>
+        <div className='middle-section'>
+        <SingleFileUploader resumeFile={resumeFile} resumeText={resumeText} setResumeFile={setResumeFile} onUploadSuccess={handleUploadSuccess}/>
+          <div className='right'>
+            <JobUrlUpload text={urlText} setText={setUrlText} placeholder="Upload Job URL here" onUploadSuccess={handleJobTextSuccess}/>
+            <StringUpload keyText={apiKey} setKeyText={setApiKey} placeholder="Upload OpenAI API key here" />
+          </div>
+        </div>
+        {isLoading && <p>Loading...</p>}
+        {error && <p style={{ color: 'red' }}>{error}</p>}
+        <CoverLetterOutput 
+          value={coverLetterText} 
+          onChange={setCoverLetterText} 
+          placeholder='Cover letter output here!'
+          jobText={jobText}
+          setCoverLetterText={setCoverLetterText}
+          coverLetterText={coverLetterText}
+          resumeText={resumeText}
+          apiKey={apiKey}
+        />
+        {/* <PdfDownload coverLetterText={coverLetterText} /> */}
+      </div>
+    </>
   );
 }
 

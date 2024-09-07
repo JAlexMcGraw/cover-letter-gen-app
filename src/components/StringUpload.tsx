@@ -31,7 +31,7 @@ const stringUpload: React.FC<stringUploadProps> = ({ keyText, setKeyText, placeh
     }
 
     return (
-        <div>
+        <div className="apikey">
             <textarea
                 value={shownText}
                 onChange={handleUrlUpload}

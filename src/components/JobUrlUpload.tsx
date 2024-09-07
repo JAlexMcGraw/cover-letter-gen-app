@@ -52,7 +52,7 @@ const JobUrlUpload: React.FC<JobUrlUploadProps> = ({ text, setText, placeholder,
     };
 
     return (
-        <div>
+        <div className="url">
             <textarea
                 value={text}
                 onChange={handleUrlUpload}
