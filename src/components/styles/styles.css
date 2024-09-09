@@ -9,6 +9,11 @@
   color: whitesmoke;
 }
 
+#root {
+  width: 100%;
+  padding: 10%;
+}
+
 .header {
     color: white;
     justify-content: center;
@@ -30,13 +35,13 @@
   flex: auto;
 }
 
-.left {
+/* .left {
   align-self: left;
 }
 
 .right {
-  justify-self: right;
-}
+  margin-right: auto;
+} */
 
 .bottom {
   width: 100%;
@@ -45,6 +50,18 @@
 
 .middle-section {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
+  align-items: flex-start;
   width: 100%;
+}
+
+.right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.url,
+.apikey {
+  margin-top: 10px;
 }

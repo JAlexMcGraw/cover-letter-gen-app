@@ -1,12 +1,11 @@
-import { Fragment, useState } from 'react'
+import 'vite/modulepreload-polyfill'
+import { useState } from 'react'
 import Header from './components/Header';
 import StringUpload from './components/StringUpload';
 import SingleFileUploader from './components/SingleFileUpload';
 import CoverLetterOutput from './components/CoverLetterOutput';
-import ResumeText from './components/ResumeText';
 import axios from 'axios';
 import JobUrlUpload from './components/JobUrlUpload';
-import PdfDownload from './components/PdfDownload';
 
 function App() {
   const [coverLetterText, setCoverLetterText] = useState<string>('');
@@ -81,7 +80,9 @@ function App() {
       {/* </header> */}
       <div className='body'>
         <div className='middle-section'>
-        <SingleFileUploader resumeFile={resumeFile} resumeText={resumeText} setResumeFile={setResumeFile} onUploadSuccess={handleUploadSuccess}/>
+          <div className='left'>
+            <SingleFileUploader resumeFile={resumeFile} resumeText={resumeText} setResumeFile={setResumeFile} setResumeText={setResumeText} onUploadSuccess={handleUploadSuccess}/>
+          </div>
           <div className='right'>
             <JobUrlUpload text={urlText} setText={setUrlText} placeholder="Upload Job URL here" onUploadSuccess={handleJobTextSuccess}/>
             <StringUpload keyText={apiKey} setKeyText={setApiKey} placeholder="Upload OpenAI API key here" />

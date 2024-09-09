@@ -8,10 +8,11 @@ interface SingleFileUploaderProps {
     resumeFile: File | null;
     resumeText: string | undefined;
     setResumeFile: Dispatch<SetStateAction<File | null>>;
+    setResumeText: Dispatch<SetStateAction<string | undefined>>;
     onUploadSuccess: (text: string) => void;
 }
 
-const SingleFileUploader: React.FC<SingleFileUploaderProps> = ({ resumeFile, resumeText, setResumeFile, onUploadSuccess }) => {
+const SingleFileUploader: React.FC<SingleFileUploaderProps> = ({ resumeFile, resumeText, setResumeFile, setResumeText, onUploadSuccess }) => {
 //   const [file, setFile] = useState<File | null>(null);
   const [status, setStatus] = useState<
   'initial' | 'uploading' | 'success' | 'failure'
@@ -68,7 +69,6 @@ const SingleFileUploader: React.FC<SingleFileUploaderProps> = ({ resumeFile, res
 
   return (
     <>
-      <div className='left'>
         {/* <label htmlFor="file" className="sr-only"> */}
           Choose a file
         {/* </label> */}
@@ -93,8 +93,8 @@ const SingleFileUploader: React.FC<SingleFileUploaderProps> = ({ resumeFile, res
         text={resumeText}
         placeholder='Resume text here'
         disabled={true}
+        onChange={setResumeText}
       />
-      </div>
     </>
   );
 };
