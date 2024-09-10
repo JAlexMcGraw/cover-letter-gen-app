@@ -26,3 +26,4 @@ dist-ssr
 openai_api_key.txt
 .vercel
 /src/backend/
+requirements.txt
