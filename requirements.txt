@@ -15,19 +15,19 @@ idna==3.4
 jsonpatch==1.32
 jsonpointer==2.1
 # libmambapy==1.5.3
-menuinst==2.0.2
-packaging==23.1
-pip==23.3.1
-platformdirs==3.10.0
-pluggy==1.0.0
-pycosat==0.6.6
-pycparser==2.21
-PySocks==1.7.1
-requests==2.31.0
-ruamel.yaml==0.17.21
-setuptools==68.2.2
-tqdm==4.65.0
-truststore==0.8.0
-urllib3==2.1.0
-wheel==0.41.2
-zstandard==0.19.0
+# menuinst==2.0.2
+# packaging==23.1
+# pip==23.3.1
+# platformdirs==3.10.0
+# pluggy==1.0.0
+# pycosat==0.6.6
+# pycparser==2.21
+# PySocks==1.7.1
+# requests==2.31.0
+# ruamel.yaml==0.17.21
+# setuptools==68.2.2
+# tqdm==4.65.0
+# truststore==0.8.0
+# urllib3==2.1.0
+# wheel==0.41.2
+# zstandard==0.19.0
