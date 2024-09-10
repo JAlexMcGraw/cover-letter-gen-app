@@ -53,6 +53,7 @@ const CoverLetterOutput: React.FC<TextAreaProps> = ({ value, onChange, setCoverL
       
       setGenerationStatus('generating');
       const response = await axios.post(`${apiUrl}/generate_cover_letter/`, { // /api
+        withCredentials: true,
         job_post_text: jobText,
         resume_text: resumeText,
         openai_api_key: apiKey
