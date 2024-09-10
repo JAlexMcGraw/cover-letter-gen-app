@@ -1,4 +1,4 @@
-# Cover Letter Generator
+# Cover Letter Generator (Refresh cache)
 
 ### Built using Typescript + Python + React
 
