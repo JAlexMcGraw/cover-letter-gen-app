@@ -9,7 +9,7 @@ interface JobUrlUploadProps {
     onUploadSuccess: (text: string) => void;
 }
 const JobUrlUpload: React.FC<JobUrlUploadProps> = ({ text, setText, placeholder, onUploadSuccess }) => {
-    
+    const apiUrl = import.meta.env.VITE_API_URL;
     const [status, setStatus] = useState<
     'initial' | 'uploading' | 'success' | 'failure'
     >('initial');
@@ -23,7 +23,7 @@ const JobUrlUpload: React.FC<JobUrlUploadProps> = ({ text, setText, placeholder,
         setStatus('uploading')
 
         try {
-            const response = await axios.post('/api/load_job_url/', {
+            const response = await axios.post(`${apiUrl}/load_job_url/`, { //api
                 'job_posting_url': text
             }, {
                 headers: {

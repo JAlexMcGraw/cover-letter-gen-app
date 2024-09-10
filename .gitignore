@@ -24,3 +24,5 @@ dist-ssr
 *.sw?
 
 openai_api_key.txt
+.vercel
+/src/backend/

@@ -16,6 +16,8 @@ interface TextAreaProps {
 
 const CoverLetterOutput: React.FC<TextAreaProps> = ({ value, onChange, setCoverLetterText, coverLetterText, resumeText, apiKey, jobText, placeholder, disabled = false }) => {
 
+  const apiUrl = import.meta.env.VITE_API_URL;
+
   if (value === '') {
     disabled = true;
   } else {
@@ -50,7 +52,7 @@ const CoverLetterOutput: React.FC<TextAreaProps> = ({ value, onChange, setCoverL
       });
       
       setGenerationStatus('generating');
-      const response = await axios.post('/api/generate_cover_letter/', {
+      const response = await axios.post(`${apiUrl}/generate_cover_letter/`, { // /api
         job_post_text: jobText,
         resume_text: resumeText,
         openai_api_key: apiKey

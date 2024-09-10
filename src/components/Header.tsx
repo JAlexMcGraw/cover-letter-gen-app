@@ -5,7 +5,7 @@ type HeadingProps = { title: string
                     textColor?: string 
                 }
 
-const Header = ({ title, textColor }: HeadingProps ): ReactElement => { // style={{ color: 'white', alignItems: 'center' }}
+const Header = ({ title }: HeadingProps ): ReactElement => { // style={{ color: 'white', alignItems: 'center' }}
     return (
         <h1 className="header"> 
             {title}

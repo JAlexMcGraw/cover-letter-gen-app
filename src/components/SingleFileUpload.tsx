@@ -14,6 +14,7 @@ interface SingleFileUploaderProps {
 
 const SingleFileUploader: React.FC<SingleFileUploaderProps> = ({ resumeFile, resumeText, setResumeFile, setResumeText, onUploadSuccess }) => {
 //   const [file, setFile] = useState<File | null>(null);
+  const apiUrl = import.meta.env.VITE_API_URL;
   const [status, setStatus] = useState<
   'initial' | 'uploading' | 'success' | 'failure'
   >('initial');
@@ -41,7 +42,7 @@ const SingleFileUploader: React.FC<SingleFileUploaderProps> = ({ resumeFile, res
     formData.append('file', resumeFile);
   
     try {
-      const response = await axios.post('/api/upload-pdf/', formData, {
+      const response = await axios.post(`${apiUrl}/upload-pdf/`, formData, { // /api
         headers: {
           'Content-Type': 'multipart/form-data',
         },
