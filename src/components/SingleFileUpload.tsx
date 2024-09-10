@@ -45,6 +45,7 @@ const SingleFileUploader: React.FC<SingleFileUploaderProps> = ({ resumeFile, res
       const response = await axios.post(`${apiUrl}/upload-pdf/`, formData, { // /api
         headers: {
           'Content-Type': 'multipart/form-data',
+          'withCredentials': true,
         },
         validateStatus: (status) => status < 500, // Treat all non-500 responses as successful
       });
