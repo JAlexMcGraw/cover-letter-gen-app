@@ -1,5 +1,12 @@
 {
     "rewrites": [
-      { "source": "/(.*)", "destination": "/index.html" }
+      {
+        "source": "/api/:path*",
+        "destination": "https://cover-letter-generator-backend-61551df02a3c.herokuapp.com/:path*"
+      },
+      {
+        "source": "/(.*)",
+        "destination": "/index.html"
+      }
     ]
   }
