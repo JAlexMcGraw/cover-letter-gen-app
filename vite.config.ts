@@ -24,7 +24,7 @@ export default defineConfig(({ mode }) => {
     plugins: [react()],
     server: {
       proxy: {
-        '/api': {
+        '': { // /api
           target: process.env.VITE_API_URL || 'http://localhost:8000',
           changeOrigin: true,
           // rewrite: (path) => path.replace(/^\/api/, '')
