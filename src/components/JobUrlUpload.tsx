@@ -23,9 +23,9 @@ const JobUrlUpload: React.FC<JobUrlUploadProps> = ({ text, setText, placeholder,
         setStatus('uploading')
 
         try {
-            const response = await axios.post(`api/load_job_url/`, { //api
+            const response = await axios.post(`/api/load_job_url/`, { //api
                 'job_posting_url': text,
-                withCredentials: true,
+                // withCredentials: true,
             }, {
                 headers: {
                     'Content-Type': 'application/json'

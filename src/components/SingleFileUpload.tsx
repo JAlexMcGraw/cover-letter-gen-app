@@ -42,7 +42,8 @@ const SingleFileUploader: React.FC<SingleFileUploaderProps> = ({ resumeFile, res
     formData.append('file', resumeFile);
   
     try {
-      const response = await axios.post(`api/upload-pdf/`, formData, { // /api
+      console.log(`Posting to /api/upload-pdf/`)
+      const response = await axios.post(`/api/upload-pdf/`, formData, { // /api
         withCredentials: true,
         headers: {
           'Content-Type': 'multipart/form-data'
