@@ -60,7 +60,7 @@ async def process_pdf(pdf_source, is_local_file=False):
     return {"status": "Processing completed",
             "text": text}
 
-@app.post("/upload-pdf/")
+@app.post("/api/upload-pdf/")
 async def upload_pdf(file: UploadFile = File(...)):
     logger.log(level=1, msg="/upload-pdf/ endpoint reached")
     if file.content_type != "application/pdf":
