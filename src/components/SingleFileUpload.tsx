@@ -42,8 +42,9 @@ const SingleFileUploader: React.FC<SingleFileUploaderProps> = ({ resumeFile, res
     formData.append('file', resumeFile);
   
     try {
-      console.log(`Posting to /api/upload-pdf/`) // for some reason in Heroku logs, it shows GET, not POST
-      console.log(`VITE_API_URL: ${process.env.REACT_APP_API_URL}`)
+      console.log('API_URL:', apiUrl);
+      console.log('Full URL:', `${apiUrl}/api/upload-pdf/`);
+
       const response = await axios.post(`${apiUrl}/api/upload-pdf/`, formData, { // /api
         withCredentials: true,
         headers: {
