@@ -1,12 +1,26 @@
 {
-    "rewrites": [
-      {
-        "source": "/api/:path*",
-        "destination": "https://cover-letter-generator-backend-61551df02a3c.herokuapp.com/:path*"
-      },
-      {
-        "source": "/(.*)",
-        "destination": "/index.html"
-      }
-    ]
+  "version": 2,
+  "builds": [
+    {
+      "src": "backend/main.py",
+      "use": "@vercel/python"
+    },
+    {
+      "src": "frontend/package.json",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "backend/main.py"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "frontend/$1"
+    }
+  ],
+  "env": {
+    "REACT_APP_API_URL": "https://your-vercel-app-url.vercel.app"
   }
+}
