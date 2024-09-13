@@ -1,12 +1,26 @@
 {
-    "rewrites": [
-      {
-        "source": "/api/:path*",
-        "destination": "https://your-vercel-app-url.vercel.app:path*"
-      },
-      {
-        "source": "/(.*)",
-        "destination": "/index.html"
-      }
-    ]
+  "version": 2,
+  "builds": [
+    {
+      "src": "backend/main.py",
+      "use": "@vercel/python"
+    },
+    {
+      "src": "package.json",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "backend/main.py"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/"
+    }
+  ],
+  "env": {
+    "REACT_APP_API_URL": "https://your-vercel-app-url.vercel.app"
   }
+}
