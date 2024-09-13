@@ -28,3 +28,4 @@ openai_api_key.txt
 /src/backend/
 .env.development
 .env.production
+.env.local

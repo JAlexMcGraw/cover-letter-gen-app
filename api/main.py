@@ -60,9 +60,15 @@ async def process_pdf(pdf_source, is_local_file=False):
     return {"status": "Processing completed",
             "text": text}
 
+
+@app.get('/')
+async def health_check():
+    return "Health check successsful"
+
+
 @app.post("/api/upload-pdf/")
 async def upload_pdf(file: UploadFile = File(...)):
-    logger.log(level=1, msg="/upload-pdf/ endpoint reached")
+    logger.log(msg="/upload-pdf/ endpoint reached")
     if file.content_type != "application/pdf":
         raise HTTPException(status_code=400, detail="File must be a PDF")
     

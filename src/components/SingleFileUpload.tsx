@@ -14,7 +14,7 @@ interface SingleFileUploaderProps {
 
 const SingleFileUploader: React.FC<SingleFileUploaderProps> = ({ resumeFile, resumeText, setResumeFile, setResumeText, onUploadSuccess }) => {
 //   const [file, setFile] = useState<File | null>(null);
-  // const apiUrl = import.meta.env.VITE_API_URL;
+  const apiUrl = import.meta.env.REACT_APP_API_URL;
   const [status, setStatus] = useState<
   'initial' | 'uploading' | 'success' | 'failure'
   >('initial');
@@ -44,7 +44,7 @@ const SingleFileUploader: React.FC<SingleFileUploaderProps> = ({ resumeFile, res
     try {
       console.log(`Posting to /api/upload-pdf/`) // for some reason in Heroku logs, it shows GET, not POST
       console.log(`VITE_API_URL: ${process.env.VITE_API_URL}`)
-      const response = await axios.post(`/api/upload-pdf/`, formData, { // /api
+      const response = await axios.post(`${apiUrl}/api/upload-pdf/`, formData, { // /api
         withCredentials: true,
         headers: {
           'Content-Type': 'multipart/form-data'
