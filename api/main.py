@@ -65,7 +65,12 @@ async def process_pdf(pdf_source, is_local_file=False):
 
 @app.get('/api/health-check/')
 async def health_check():
-    return "Health check successsful"
+    try:
+        logger.info("Health check endpoint called")
+        return {"status": "Health check successful"}
+    except Exception as e:
+        logger.error(f"Health check failed: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
 
 
 @app.post("/api/upload-pdf/")
