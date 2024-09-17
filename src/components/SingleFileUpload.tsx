@@ -14,7 +14,7 @@ interface SingleFileUploaderProps {
 
 const SingleFileUploader: React.FC<SingleFileUploaderProps> = ({ resumeFile, resumeText, setResumeFile, setResumeText, onUploadSuccess }) => {
 //   const [file, setFile] = useState<File | null>(null);
-  // const apiUrl = import.meta.env.REACT_APP_API_URL;
+  // const apiUrl = import.meta.env.REACT_APP_API_URL; /
   const apiUrl = process.env.VITE_API_URL;
   const [status, setStatus] = useState<
   'initial' | 'uploading' | 'success' | 'failure'
