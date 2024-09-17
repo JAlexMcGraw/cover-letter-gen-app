@@ -74,9 +74,9 @@ fastapi==0.111.0
 # jupyter_core==5.7.1
 # keyring==24.3.1
 # kiwisolver==1.4.5
-# langchain==0.1.5
-# langchain-community==0.0.20
-# langchain-core==0.1.21
+langchain==0.1.5
+langchain-community==0.0.20
+langchain-core==0.1.21
 # langdetect==1.0.9
 # langsmith==0.0.87
 # Levenshtein==0.25.1
@@ -207,6 +207,7 @@ distro==1.8.0
 idna==3.4
 jsonpatch==1.32
 jsonpointer==2.1
+fastapi-cors
 # libmambapy==1.5.3
 # menuinst==2.0.2
 # packaging==23.1
