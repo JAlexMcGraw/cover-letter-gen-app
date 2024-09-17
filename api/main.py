@@ -63,7 +63,7 @@ async def process_pdf(pdf_source, is_local_file=False):
             "text": text}
 
 
-@app.get('/')
+@app.get('/api/health-check/')
 async def health_check():
     return "Health check successsful"
 
