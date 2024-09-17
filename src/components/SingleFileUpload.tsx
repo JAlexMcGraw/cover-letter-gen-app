@@ -43,7 +43,7 @@ const SingleFileUploader: React.FC<SingleFileUploaderProps> = ({ resumeFile, res
     formData.append('file', resumeFile);
   
     try {
-      const apiUrl = import.meta.env.REACT_APP_API_URL;
+      const apiUrl = import.meta.env.VITE_API_URL;
       console.log('API_URL:', apiUrl);
       console.log('Full URL:', `${apiUrl}/api/upload-pdf/`);
 
