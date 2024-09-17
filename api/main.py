@@ -147,6 +147,6 @@ async def cover_letter_generate(data: CoverLetterData):
 #########################
 
 
-# if __name__ == "__main__":
-#     port = int(os.getenv("PORT", 5000))
-#     uvicorn.run(app, host="0.0.0.0", port=port)
+if __name__ == "__main__":
+    port = int(os.getenv("PORT", 5000))
+    uvicorn.run(app, host="0.0.0.0", port=port)
