@@ -25,6 +25,7 @@ const JobUrlUpload: React.FC<JobUrlUploadProps> = ({ text, setText, placeholder,
         try {
             const apiUrl = import.meta.env.VITE_API_URL;
             console.log('Full URL: ', `${apiUrl}/api/load_job_url/`);
+            console.log('URL to be uploaded: ', `${text}`);
         //     const response = await axios.post(`${apiUrl}/api/load_job_url/`, { //api
         //         'job_posting_url': text,
         //         withCredentials: true,
