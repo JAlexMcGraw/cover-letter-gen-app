@@ -44,17 +44,15 @@ const SingleFileUploader: React.FC<SingleFileUploaderProps> = ({ resumeFile, res
   
     try {
       const apiUrl = import.meta.env.VITE_API_URL;
-      const apiUrlProcess = process.env.VITE_API_URL;
-      console.log('api url process: ', apiUrlProcess);
       console.log('API_URL:', apiUrl);
       console.log('Full URL:', `${apiUrl}/api/upload-pdf/`);
 
-      const response = await axios.post(`${apiUrl}/api/upload-pdf/`, formData, { // /api
+      const response = await axios.post(`${apiUrl}/api/upload-pdf/`, formData, {
         withCredentials: true,
         headers: {
           'Content-Type': 'multipart/form-data'
         },
-        validateStatus: (status) => status < 500, // Treat all non-500 responses as successful
+        validateStatus: (status) => status < 500 // Treat all non-500 responses as successful
       });
   
       console.log('Response status:', response.status);
