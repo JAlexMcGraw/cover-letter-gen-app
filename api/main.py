@@ -25,23 +25,23 @@ logging.basicConfig(level=logging.DEBUG)
 logger = logging.getLogger(__name__)
 
 # Setup CORS
-origins = [
-    "https://cover-letter-gen-app.vercel.app",
-    "https://cover-letter-gen-616w1v7vg-alex-mcgraws-projects.vercel.app",
-    "http://localhost:3000",  # Add this if you need local development
-    "http://localhost:5173"
-]
+# origins = [
+#     "https://cover-letter-gen-app.vercel.app",
+#     "https://cover-letter-gen-616w1v7vg-alex-mcgraws-projects.vercel.app",
+#     "http://localhost:3000",  # Add this if you need local development
+#     "http://localhost:5173"
+# ]
 
-app.add_middleware(
-    CORSMiddleware,
-    # allow_origins=origins,
-    allow_origins=["*"],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-    # expose_headers=["*"],
-    # max_age=600,  # Cache preflight requests for 10 minutes
-)
+# app.add_middleware(
+#     CORSMiddleware,
+#     # allow_origins=origins,
+#     allow_origins=["*"],
+#     allow_credentials=True,
+#     allow_methods=["*"],
+#     allow_headers=["*"],
+#     # expose_headers=["*"],
+#     # max_age=600,  # Cache preflight requests for 10 minutes
+# )
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -147,6 +147,6 @@ async def cover_letter_generate(data: CoverLetterData):
 #########################
 
 
-if __name__ == "__main__":
-    port = int(os.getenv("PORT", 5000))
-    uvicorn.run(app, host="0.0.0.0", port=port)
+# if __name__ == "__main__":
+#     port = int(os.getenv("PORT", 5000))
+#     uvicorn.run(app, host="0.0.0.0", port=port)
