@@ -26,6 +26,6 @@
     }
   ],
   "env": {
-    "REACT_APP_API_URL": "https://cover-letter-gen-app.vercel.app/"
+    "VITE_API_URL": "https://cover-letter-gen-app.vercel.app/"
   }
 }
