@@ -2,7 +2,7 @@ from fastapi import FastAPI, File, UploadFile, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
 from langchain_community.document_loaders import SeleniumURLLoader
-from utils import CoverLetterGenerator
+from api.utils import CoverLetterGenerator
 from bs4 import BeautifulSoup
 from pydantic import BaseModel
 from copy import deepcopy
@@ -16,7 +16,11 @@ import logging
 import traceback
 import uvicorn
 import os
+import sys
 import json
+
+# Add the parent directory to sys.path
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 app = FastAPI()
 
