@@ -23,15 +23,23 @@ const JobUrlUpload: React.FC<JobUrlUploadProps> = ({ text, setText, placeholder,
         setStatus('uploading')
 
         try {
-            const response = await axios.post(`/api/load_job_url/`, { //api
-                'job_posting_url': text,
-                // withCredentials: true,
-            }, {
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                validateStatus: (status) => status < 500,
-        });
+            const apiUrl = import.meta.env.VITE_API_URL;
+        //     const response = await axios.post(`${apiUrl}/api/load_job_url/`, { //api
+        //         'job_posting_url': text,
+        //         withCredentials: true,
+        //     }, {
+        //         headers: {
+        //             'Content-Type': 'application/json'
+        //         },
+        //         validateStatus: (status) => status < 500,
+        // });
+        const response = await axios.post(`${apiUrl}/api/load_job_url/`, {'job_posting_url': text}, { //api
+            withCredentials: true,
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            validateStatus: (status) => status < 500,
+    });
 
             console.log("Response data", response.data)
         if (response.status === 200 && response.data && response.data.text) {
