@@ -2,6 +2,7 @@ from fastapi import FastAPI, File, UploadFile, HTTPException, Response
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
 from langchain_community.document_loaders import SeleniumURLLoader
+from urllib.request import Request, urlopen
 from api.utils import CoverLetterGenerator
 from bs4 import BeautifulSoup
 from pydantic import BaseModel
@@ -111,15 +112,25 @@ async def upload_pdf(file: UploadFile = File(...)):
 
 
 ###########################
+# @app.post("/api/load_job_url/")
+# async def process_job_url(job_posting_url: Dict[str,str]) -> Dict[str,str]:
+#     html = SeleniumURLLoader([job_posting_url['job_posting_url']]).load()
+
+#     soup = BeautifulSoup(html[0].page_content, 'html.parser')
+#     text_content = soup.get_text(separator=' ', strip=True)
+    
+#     return {"text": text_content}
+
+
 @app.post("/api/load_job_url/")
 async def process_job_url(job_posting_url: Dict[str,str]) -> Dict[str,str]:
-    html = SeleniumURLLoader([job_posting_url['job_posting_url']]).load()
+    html = Request([job_posting_url['job_posting_url']], headers={'User-Agent': 'Mozilla/5.0'})
+    html_page = urlopen(html).read()
 
-    soup = BeautifulSoup(html[0].page_content, 'html.parser')
+    soup = BeautifulSoup(html_page, 'html.parser')
     text_content = soup.get_text(separator=' ', strip=True)
     
     return {"text": text_content}
-
 
 class CoverLetterData(BaseModel):
     job_post_text: str
