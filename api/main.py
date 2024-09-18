@@ -111,7 +111,7 @@ async def upload_pdf(file: UploadFile = File(...)):
 
 
 ###########################
-@app.post("/load_job_url/")
+@app.post("/api/load_job_url/")
 async def process_job_url(job_posting_url: Dict[str,str]) -> Dict[str,str]:
     html = SeleniumURLLoader([job_posting_url['job_posting_url']]).load()
 
@@ -127,7 +127,7 @@ class CoverLetterData(BaseModel):
     openai_api_key: str
 
 
-@app.post("/generate_cover_letter/")
+@app.post("/api/generate_cover_letter/")
 async def cover_letter_generate(data: CoverLetterData):
     try:
     #     logger.info("Received request for cover letter generation")
