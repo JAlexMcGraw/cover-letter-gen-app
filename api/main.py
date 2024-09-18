@@ -46,8 +46,8 @@ app.add_middleware(
 )
 
 # Configure logging
-logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger(__name__)
+# logging.basicConfig(level=logging.INFO)
+# logger = logging.getLogger(__name__)
 
 async def process_pdf(pdf_source, is_local_file=False):
     # Process the PDF from URL or local file
@@ -88,7 +88,7 @@ async def health_check():
 
 @app.post("/api/upload-pdf/")
 async def upload_pdf(file: UploadFile = File(...)):
-    logger.log(msg="/upload-pdf/ endpoint reached")
+    # logger.log(msg="/upload-pdf/ endpoint reached")
     if file.content_type != "application/pdf":
         raise HTTPException(status_code=400, detail="File must be a PDF")
     
