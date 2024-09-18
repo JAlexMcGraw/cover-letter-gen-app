@@ -9,7 +9,7 @@
 # async-timeout==4.0.3
 # attrs==23.2.0
 # backoff==2.2.1
-# beautifulsoup4==4.12.3
+beautifulsoup4==4.12.3
 # blessed==1.20.0
 # Brotli==1.1.0
 # certifi==2024.8.30
@@ -118,12 +118,12 @@ openai==1.11.1
 # ptyprocess==0.7.0
 # pure-eval==0.2.2
 # pycparser==2.21
-# pydantic
-# pydantic_core
+pydantic
+pydantic_core
 # Pygments==2.17.2
 # pymongo==4.7.2
 # pyparsing==3.1.2
-# PyPDF2==2.11.1
+PyPDF2==2.11.1
 # PySocks==1.7.1
 # pytest==8.0.0
 # pytest-subtests==0.11.0
@@ -141,7 +141,7 @@ python-multipart==0.0.9
 # readchar==4.1.0
 # regex==2023.12.25
 # renumerate==1.1.12
-# requests==2.31.0
+requests==2.31.0
 # revel==0.9.1
 # rich==13.7.1
 # rio-ui==0.7.7

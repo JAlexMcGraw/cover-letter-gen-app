@@ -5,8 +5,6 @@ from langchain_community.document_loaders import SeleniumURLLoader
 from api.utils import CoverLetterGenerator
 from bs4 import BeautifulSoup
 from pydantic import BaseModel
-from copy import deepcopy
-from docx import Document
 from typing import Dict
 import io
 import requests
