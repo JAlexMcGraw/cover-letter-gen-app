@@ -1,4 +1,4 @@
-from fastapi import FastAPI, File, UploadFile, HTTPException, Request
+from fastapi import FastAPI, File, UploadFile, HTTPException, Response
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
 from langchain_community.document_loaders import SeleniumURLLoader
@@ -65,6 +65,16 @@ async def process_pdf(pdf_source, is_local_file=False):
     return {"status": "Processing completed",
             "text": text}
 
+@app.options("/api/upload-pdf/")
+async def options_upload_pdf():
+    return Response(
+        status_code=200,
+        headers={
+            "Access-Control-Allow-Origin": "https://cover-letter-gen-app.vercel.app",
+            "Access-Control-Allow-Methods": "POST, OPTIONS",
+            "Access-Control-Allow-Headers": "Content-Type",
+        },
+    )
 
 @app.get('/api/health-check/')
 async def health_check():
