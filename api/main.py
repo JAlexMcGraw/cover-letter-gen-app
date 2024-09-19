@@ -124,10 +124,8 @@ async def upload_pdf(file: UploadFile = File(...)):
 
 @app.post("/api/load_job_url/")
 async def process_job_url(job_posting_url: Dict[str,str]) -> Dict[str,str]:
-    html = Request([job_posting_url['job_posting_url']], headers={'User-Agent': 'Mozilla/5.0'})
-    html_page = urlopen(html).read()
-
-    soup = BeautifulSoup(html_page, 'html.parser')
+    response = requests.get(job_posting_url['job_posting_url'])
+    soup = BeautifulSoup(response.text, 'html.parser')
     text_content = soup.get_text(separator=' ', strip=True)
     
     return {"text": text_content}
